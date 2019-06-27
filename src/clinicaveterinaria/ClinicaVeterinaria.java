@@ -44,41 +44,14 @@ public class ClinicaVeterinaria {
 
         //Tiene toda la pinta de ser un método
         do {
-            System.out.println("¿Qué quieres hacer?");
-            System.out.println("1. Añadir un nuevo cliente");
-            System.out.println("2. Añadir una nueva mascota para un cliente existente");
-            System.out.println("3. Mostrar todos los dueños");
-            System.out.println("4. Mostrar todas las mascotas");
-            System.out.println("5. Salir");
-            try {
-                numero = Integer.parseInt(teclado.readLine());
-            } catch (IOException e) {
-                System.err.println("Vaya, un error de entrada/salida... qué raro");
-            } catch (NumberFormatException e) {
-                System.err.println("Has causado una excepción porque no has entrado un número entero, gracias");
-            }
+            numero = mostrarMenu(numero, teclado);
 
             //Otros métodos quizás?
             switch (numero) {
                 case 1:
-                    //CLIENTE NUEVO
-                    System.out.println("INTRODUCIMOS EL CLIENTE");
-                    System.out.println("Introduce el nombre");
-                    String nombre = teclado.readLine();
-                    System.out.println("Introduce los apellidos");
-                    String apellidos = teclado.readLine();
-                    System.out.println("Introduce el DNI");
-                    String dni = teclado.readLine();
-                    System.out.println("Introduce la edad");
-                    int edad = 0;
-                    try {
-                        edad = Integer.parseInt(teclado.readLine());
-                    } catch (Exception e) {
-                        System.err.println("Has causado una excepción porque no has entrado un número entero, gracias");
-                        return;
-                    }
-                    Persona p1 = new Persona(nombre, apellidos, dni, edad);
-                    clientes.add(p1);
+            if (nuevoCliente(teclado, clientes)) {
+                return;
+            }
                     break;
 
                 case 2:
@@ -162,6 +135,45 @@ public class ClinicaVeterinaria {
 
         } while (numero != 5);
 
+    }
+
+    private static boolean nuevoCliente(BufferedReader teclado, ArrayList<Persona> clientes) throws IOException {
+        //CLIENTE NUEVO
+        System.out.println("INTRODUCIMOS EL CLIENTE");
+        System.out.println("Introduce el nombre");
+        String nombre = teclado.readLine();
+        System.out.println("Introduce los apellidos");
+        String apellidos = teclado.readLine();
+        System.out.println("Introduce el DNI");
+        String dni = teclado.readLine();
+        System.out.println("Introduce la edad");
+        int edad = 0;
+        try {
+            edad = Integer.parseInt(teclado.readLine());
+        } catch (Exception e) {
+            System.err.println("Has causado una excepción porque no has entrado un número entero, gracias");
+            return true;
+        }
+        Persona p1 = new Persona(nombre, apellidos, dni, edad);
+        clientes.add(p1);
+        return false;
+    }
+
+    private static int mostrarMenu(int numero, BufferedReader teclado) {
+        System.out.println("¿Qué quieres hacer?");
+        System.out.println("1. Añadir un nuevo cliente");
+        System.out.println("2. Añadir una nueva mascota para un cliente existente");
+        System.out.println("3. Mostrar todos los dueños");
+        System.out.println("4. Mostrar todas las mascotas");
+        System.out.println("5. Salir");
+        try {
+            numero = Integer.parseInt(teclado.readLine());
+        } catch (IOException e) {
+            System.err.println("Vaya, un error de entrada/salida... qué raro");
+        } catch (NumberFormatException e) {
+            System.err.println("Has causado una excepción porque no has entrado un número entero, gracias");
+        }
+        return numero;
     }
 
 }
