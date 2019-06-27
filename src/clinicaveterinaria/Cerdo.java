@@ -1,3 +1,9 @@
+/**
+ * Clase Cerdo.
+ * @author Nacho
+ * @author Maria
+ * @version 1.0
+ */
 package clinicaveterinaria;
 
 public class Cerdo extends Mascota{

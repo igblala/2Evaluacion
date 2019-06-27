@@ -1,3 +1,9 @@
+/**
+ * Clase Persona.
+ * @author Nacho
+ * @author Maria
+ * @version 1.0
+ */
 package clinicaveterinaria;
 
 public class Persona {
@@ -16,7 +22,7 @@ public class Persona {
         this.edad = edad;
     }
 
-    //MÉTODOS SETTER & GETTER    
+    //MÉTODOS SETTER & GETTER 
     public String getNombre() {
         return nombre;
     }

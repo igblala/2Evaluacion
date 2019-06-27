@@ -1,9 +1,4 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
-*/
 package clinicaveterinaria;
 
 import java.util.ArrayList;
@@ -12,13 +7,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- *
- * @author nacho
+ * Clase principal.
+ * Aplicación que maneja una Clinica veterinaria
+ * and open the template in the editor.
+ * @author Nacho
+ * @author Maria
+ * @version 1.0
  */
 public class ClinicaVeterinaria {
 
     /**
-     * @param args the command line arguments
+     * Main the la aplicación Java
+     * @param args No necesario paso de argumentos
      */
     public static void main(String[] args) throws IOException {
         //ATRIBUTOS
@@ -46,36 +46,29 @@ public class ClinicaVeterinaria {
         do {
             numero = mostrarMenu(numero, teclado);
 
-            if (clienteNuevo(numero, teclado, clientes, listaMascotas)) {
+            if (proceso(numero, teclado, clientes, listaMascotas)) {
                 return;
             }
 
         } while (numero != 5);
 
     }
-
-    private static boolean clienteNuevo(int numero, BufferedReader teclado, ArrayList<Persona> clientes, ArrayList<Mascota> listaMascotas) throws IOException {
+/**
+ * Método que maneja los requerimientos de clientes.
+ * @param numero
+ * @param teclado
+ * @param clientes
+ * @param listaMascotas
+ * @return
+ * @throws IOException 
+ */
+    private static boolean proceso(int numero, BufferedReader teclado, ArrayList<Persona> clientes, ArrayList<Mascota> listaMascotas) throws IOException {
         //Otros métodos quizás?
         switch (numero) {
             case 1:
-                //CLIENTE NUEVO
-                System.out.println("INTRODUCIMOS EL CLIENTE");
-                System.out.println("Introduce el nombre");
-                String nombre = teclado.readLine();
-                System.out.println("Introduce los apellidos");
-                String apellidos = teclado.readLine();
-                System.out.println("Introduce el DNI");
-                String dni = teclado.readLine();
-                System.out.println("Introduce la edad");
-                int edad = 0;
-                try {
-                    edad = Integer.parseInt(teclado.readLine());
-                } catch (Exception e) {
-                    System.err.println("Has causado una excepción porque no has entrado un número entero, gracias");
-                    return true;
-                }
-                Persona p1 = new Persona(nombre, apellidos, dni, edad);
-                clientes.add(p1);
+        if (clienteNuevo(teclado, clientes)) {
+            return true;
+        }
                 break;
             case 2:
                 //CLIENTE EXISTENTE, PRIMERO LO HABREMOS LISTADO CON LA OPCIÓN 3
@@ -98,11 +91,11 @@ public class ClinicaVeterinaria {
                 //MASCOTA NUEVA
                 System.out.println("AHORA INTRODUCIMOS LA MASCOTA");
                 System.out.println("Introduce el nombre");
-                nombre = teclado.readLine();
+                String nombre = teclado.readLine();
                 System.out.println("Introduce la raza");
                 String raza = teclado.readLine();
                 System.out.println("Introduce la edad");
-                edad = 0;
+                int edad = 0;
                 try {
                     edad = Integer.parseInt(teclado.readLine());
                 } catch (Exception e) {
@@ -152,7 +145,40 @@ public class ClinicaVeterinaria {
         }
         return false;
     }
-
+/**
+ * Crea Cliente Nuevo
+ * @param teclado
+ * @param clientes
+ * @return
+ * @throws IOException 
+ */
+    private static boolean clienteNuevo(BufferedReader teclado, ArrayList<Persona> clientes) throws IOException {
+        //CLIENTE NUEVO
+        System.out.println("INTRODUCIMOS EL CLIENTE");
+        System.out.println("Introduce el nombre");
+        String nombre = teclado.readLine();
+        System.out.println("Introduce los apellidos");
+        String apellidos = teclado.readLine();
+        System.out.println("Introduce el DNI");
+        String dni = teclado.readLine();
+        System.out.println("Introduce la edad");
+        int edad = 0;
+        try {
+            edad = Integer.parseInt(teclado.readLine());
+        } catch (Exception e) {
+            System.err.println("Has causado una excepción porque no has entrado un número entero, gracias");
+            return true;
+        }
+        Persona p1 = new Persona(nombre, apellidos, dni, edad);
+        clientes.add(p1);
+        return false;
+    }
+/**
+ * Interfaz gráfica con el usuario
+ * @param numero
+ * @param teclado
+ * @return 
+ */
     private static int mostrarMenu(int numero, BufferedReader teclado) {
         System.out.println("¿Qué quieres hacer?");
         System.out.println("1. Añadir un nuevo cliente");

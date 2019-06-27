@@ -1,3 +1,9 @@
+/**
+ * Clase Persona.
+ * @author Nacho
+ * @author Maria
+ * @version 1.0
+ */
 package clinicaveterinaria;
 
 
